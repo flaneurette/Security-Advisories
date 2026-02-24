@@ -51,10 +51,10 @@ NOTE: The irony is that if it fails, often on a VPS, the admin has
 no way to disable it permanently across reboots. This happens on
 VPS hypervisors.
 
+### Additional scans to perform
+
 To prevent www-data PHP RCE, which could potentially invoke BPF
 programs.
-
-### Additional scans to perform
 
 ```
 # World-writable files in web root:
