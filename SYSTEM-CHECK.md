@@ -297,7 +297,7 @@ Host *
 
 # Extra SSH Hardening conf.
 
-We add this extra file, so that if the main ssh configs are somehow overwirtten, we still can load these extra security measures. Useful extra layer of defense.
+We add this extra file, so that if the main ssh configs are somehow overwritten, we still can load these extra security measures. Useful extra layer of defense.
 
 ```
 nano /etc/ssh/sshd_config.d/99-hardening.conf
