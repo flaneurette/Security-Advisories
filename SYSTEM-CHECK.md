@@ -280,7 +280,7 @@ Paste:
 Port 22                      # Change if you want non-standard port
 AddressFamily any
 ListenAddress 0.0.0.0
-ListenAddress ::
+# ListenAddress ::			 # Only if you support IPv6! 
 
 Protocol 2                   # Only SSH protocol 2
 
