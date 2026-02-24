@@ -318,7 +318,7 @@ ClientAliveInterval 60
 ClientAliveCountMax 3
 X11Forwarding no
 PrintMotd no
-TCPKeepAlive yes
+TCPKeepAlive no
 
 # Logging
 SyslogFacility AUTH
