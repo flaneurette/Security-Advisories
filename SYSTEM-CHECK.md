@@ -434,7 +434,13 @@ net.ipv4.conf.default.log_martians = 1
 # -------------------------------------------------------
 # Network Performance
 # -------------------------------------------------------
-net.ipv4.ip_local_port_range = 1024 65535
+
+# For high traffic:
+# net.ipv4.ip_local_port_range = 1024 65535
+
+# For low traffic:
+net.ipv4.ip_local_port_range = 49152 65535
+
 net.core.bpf_jit_harden = 2
 
 # -------------------------------------------------------
