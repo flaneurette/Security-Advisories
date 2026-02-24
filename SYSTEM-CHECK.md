@@ -4,6 +4,58 @@ Not an advisory, but a extra nudge to check your system.
 
 A quick system check to run. Always useful to run these checks, for security hygiene. This document may be updated reguarly.
 
+# Quick commands
+
+```
+# Who is there
+who
+
+# See logins
+last
+
+# See failed logins:
+lastb
+
+# Open connections
+ss -anp | grep ESTABLISHED
+lsof -i -n -P | grep ESTABLISHED
+ss -tlnp
+ss -tulnp
+netstat -tlnp
+netstat
+
+# Cron
+crontab -l
+systemctl list-timers --all
+
+# Integrity
+ls -lat /etc/ssh/
+ls -lat /etc/cron.d/
+ls -lat /root/
+ls -lat /tmp/
+ls -lat /var/tmp/
+
+# Users with UID 0 (should only be root)
+awk -F: '($3 == 0) {print}' /etc/passwd
+
+# Users with no password
+awk -F: '($2 == "" ) {print}' /etc/shadow
+
+# Packages
+grep " install " /var/log/dpkg.log | tail -30
+grep " upgrade " /var/log/dpkg.log | tail -30
+
+# SUID and SGID files
+find / -perm /4000 -type f 2>/dev/null
+find / -perm /2000 -type f 2>/dev/null
+
+# Log
+grep "password" /var/log/auth.log | tail -20
+grep "sudo" /var/log/auth.log | tail -20
+
+# Start Lynis audit.
+sudo lynis audit system
+```
 
 ###  VPS Security
 
