@@ -297,27 +297,6 @@ Host *
     HashKnownHosts yes
 ```
 
-# Extra SSH Hardening conf.
-
-We add this extra file, so that if the main ssh configs are somehow overwritten, we still can load these extra security measures. Useful extra layer of defense.
-
-```
-nano /etc/ssh/sshd_config.d/99-hardening.conf
-```
-
-Paste:
-
-```
-X11Forwarding no
-AllowTcpForwarding no
-AllowAgentForwarding no
-MaxAuthTries 3
-MaxSessions 2
-ClientAliveCountMax 2
-TCPKeepAlive no
-LogLevel VERBOSE
-```
-
 # Sysctl config
 
 A quick properly tested sysctl config if you need one.
