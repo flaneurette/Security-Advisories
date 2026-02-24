@@ -1,6 +1,6 @@
 # System Check.
 
-Not an advisory, but a extra nudge to check your system.
+Not an advisory, but a extra nudge to check your system more often.
 
 A quick system check to run. Always useful to run these checks, for security hygiene. This document may be updated reguarly.
 
