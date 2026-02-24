@@ -456,6 +456,29 @@ kernel.unprivileged_bpf_disabled = 1
 kernel.perf_event_paranoid = 3
 
 # -------------------------------------------------------
+# Additional Kernel Hardening
+# -------------------------------------------------------
+
+# Restrict kernel pointer exposure via dmesg (already have kptr_restrict
+# but this adds an extra layer)
+kernel.printk = 3 3 3 3
+
+# Restrict unprivileged user namespaces (common container escape vector)
+kernel.unprivileged_userns_clone = 0
+
+# Prevent symlink and hardlink TOCTOU attacks
+fs.protected_symlinks = 1
+fs.protected_hardlinks = 1
+
+# Broader pipe protection (pairs with protected_fifos)
+fs.protected_regular = 2
+
+# Disable IPv4 forwarding (unless this is a router)
+# Uncomment if you do NOT have a tunnel, or tailscale.
+# net.ipv4.ip_forward = 0
+# net.ipv6.conf.all.forwarding = 0
+
+# -------------------------------------------------------
 # Filesystem
 # -------------------------------------------------------
 fs.suid_dumpable = 0
