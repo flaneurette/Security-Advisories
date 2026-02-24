@@ -196,6 +196,105 @@ Underrated risks that many sysadmins ignore you might want to consider:
 - vmhgfs-fuse and vmware-vmblock-fuse are VMware guest tools. If this is a VMware VM, these are expected, but they do represent a shared filesystem interface between host and guest that has had vulnerabilities historically.
 ```
 
+# sshd_config
+
+A quick ready to paste sshd_config.
+
+```
+nano /etc/ssh/sshd_config
+```
+
+Paste:
+
+```
+# SSH Server Configuration - Hardened
+# !BE CAREFUL! it might lock you out. Read and edit carefully.
+
+Port 22                      # Change if you want non-standard port
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+Protocol 2                   # Only SSH protocol 2
+
+# Authentication
+PermitRootLogin no            # ! Disable ROOT login !
+PasswordAuthentication no     # Key-based auth only
+ChallengeResponseAuthentication no
+UsePAM yes                    # Needed for sudo and user auth
+PubkeyAuthentication yes
+
+# Key files
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+# Security / Encryption
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512,hmac-sha2-256
+KexAlgorithms curve25519-sha256@libssh.org
+
+# Login settings
+LoginGraceTime 30s
+MaxAuthTries 3
+MaxSessions 2
+PermitEmptyPasswords no
+
+# Access control
+AllowUsers youruser          # Replace with your allowed SSH usernames
+# AllowGroups sshusers       # Alternatively, use a group
+
+# Connection options
+ClientAliveInterval 60
+ClientAliveCountMax 3
+X11Forwarding no
+PrintMotd no
+TCPKeepAlive yes
+
+# Logging
+SyslogFacility AUTH
+LogLevel VERBOSE
+
+# Misc
+Banner /etc/issue.net           # Optional: legal warning message
+```
+
+# ssh_config
+
+A quick ready to paste ssh_config.
+
+```
+nano /etc/ssh/ssh_config
+```
+
+Paste:
+
+```
+# SSH Client Configuration - Hardened
+
+Include /etc/ssh/ssh_config.d/*.conf
+
+Host *
+    ForwardAgent no
+    ForwardX11 no
+    PasswordAuthentication no
+    HostbasedAuthentication no
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+    BatchMode no
+    CheckHostIP yes
+    AddressFamily any
+    ConnectTimeout 10
+    StrictHostKeyChecking ask
+    IdentityFile ~/.ssh/id_ed25519
+    IdentityFile ~/.ssh/id_rsa
+    Port 22
+    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+    MACs hmac-sha2-512,hmac-sha2-256
+    EscapeChar ~
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+```
+
 # Sysctl config
 
 A quick properly tested sysctl config if you need one.
