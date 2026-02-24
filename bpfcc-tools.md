@@ -1,3 +1,65 @@
+# Quick mitigation
+
+### Workaround:
+
+```
+apt remove bpfcc-tools bpftrace
+apt-mark hold bpfcc-tools bpftrace
+apt remove ubuntu-kernel-accessories
+apt remove ubuntu-standard
+apt autoremove
+```
+
+### Confirm:
+
+```
+dpkg -l | grep bpfcc
+apt-mark showhold
+```
+
+### Extra check:
+
+```
+# Check current value (Best to have: 2, worst: 0.)
+sysctl kernel.unprivileged_bpf_disabled
+
+# Verify it's persistent
+grep unprivileged_bpf /etc/sysctl.conf /etc/sysctl.d/*.conf 2>/dev/null
+
+# If not found, add it
+echo "kernel.unprivileged_bpf_disabled = 2" >> /etc/sysctl.conf
+sysctl -p
+```
+
+If sysctl fails, set it to: 1
+
+NOTE: The irony is that if it fails, often on a VPS, the admin has
+no way to disable it permanently across reboots. This happens on
+VPS hypervisors.
+
+To prevent www-data PHP RCE, which could potentially invoke BPF
+programs.
+
+### Additional scans to perform
+
+```
+# World-writable files in web root:
+find /var/www -perm -o+w 2>/dev/null -ls
+
+# SUID files in web root:
+find /var/www -perm /4000 2>/dev/null -ls
+
+# Root-owned files in web directories:
+find /var/www -user root 2>/dev/null -ls
+
+If found, change ownership immediately:
+
+# Example:
+chown -R www-data:www-data /var/www
+```
+
+# Full Bug Report
+
 ```
 Bug Report: bpfcc-tools installed by default on Ubuntu Server 24.04
              via ubuntu-kernel-accessories
