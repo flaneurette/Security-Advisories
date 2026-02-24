@@ -1,5 +1,19 @@
 # Quick mitigation
 
+### Bug
+
+Snooping tools (bpfcc-tools) installed by default on Ubuntu.
+
+```
+Bug Report: bpfcc-tools installed by default on Ubuntu Server 24.04
+             via ubuntu-kernel-accessories
+
+Package: ubuntu-kernel-accessories
+Affects: Ubuntu Server 24.04 LTS (Noble)
+Severity: Medium, perhaps High.
+Type: Security / Default Install Policy
+```
+
 ### Workaround:
 
 ```
