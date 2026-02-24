@@ -53,8 +53,21 @@ find / -perm /2000 -type f 2>/dev/null
 grep "password" /var/log/auth.log | tail -20
 grep "sudo" /var/log/auth.log | tail -20
 
+# SSH keys
+find /home /root -name "authorized_keys" 2>/dev/null -exec ls -la {} \;
+find /home /root -name "authorized_keys" 2>/dev/null -exec cat {} \;
+
+# Services running
+systemctl list-units --type=service --state=running
+
+# Debsums
+debsums -c 2>/dev/null
+
 # Start Lynis audit.
 sudo lynis audit system
+
+# Aide
+aide --check
 ```
 
 ###  VPS Security
