@@ -452,6 +452,7 @@ kernel.kptr_restrict = 2
 kernel.dmesg_restrict = 1
 kernel.yama.ptrace_scope = 1
 kernel.randomize_va_space = 2
+# Set to 2 if you do not have a VPS:
 kernel.unprivileged_bpf_disabled = 1
 kernel.perf_event_paranoid = 3
 
