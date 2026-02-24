@@ -2,7 +2,7 @@
 
 Not an advisory, but a extra nudge to check your system more often.
 
-A quick system check to run. Always useful to run these checks, for security hygiene. This document may be updated reguarly, and it by no means 100% exhaustive.
+A quick system check to run. Always useful to run these checks, for security hygiene. This document may be updated reguarly, and it is by no means 100% exhaustive.
 
 # Quick commands
 
