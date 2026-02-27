@@ -17,8 +17,8 @@ Type: Security / Default Install Policy
 ### Workaround:
 
 ```
-apt remove bpfcc-tools bpftrace
-apt-mark hold bpfcc-tools bpftrace
+apt remove bpfcc-tools bpftrace bpfmon bpfcc-lua
+apt-mark hold bpfcc-tools bpftrace bpfmon
 apt remove ubuntu-kernel-accessories
 apt remove ubuntu-standard
 apt autoremove
